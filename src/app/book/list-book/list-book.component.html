@@ -1,0 +1,57 @@
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title ">Books</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <div class="example-header">
+                    <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" >
+                    </mat-form-field>
+                </div>
+                
+                <div class="example-container mat-elevation-z8">
+                
+                    <mat-table [dataSource]="dataSource" matSort>
+                
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> ID </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+                    </ng-container>
+                
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="progress">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Progress </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
+                    </ng-container>
+                
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header  class=" text-primary"> Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                    </ng-container>
+                
+                    <!-- Color Column -->
+                    <ng-container matColumnDef="color">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Color </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.color}} </mat-cell>
+                    </ng-container>
+                
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </mat-row>
+                    </mat-table>
+                
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
