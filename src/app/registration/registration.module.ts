@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { RegistrationRoutingModule } from './registration-routing.module';
+import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SharedModule } from '../shared/shared.module' ;
-import { BookRoutingModule } from './book-routing.module';
-import { AddBookComponent } from './add-book/add-book.component';
-import { ListBookComponent } from './list-book/list-book.component';
+
 
 @NgModule({
-  declarations: [
-    AddBookComponent,
-    ListBookComponent
-  ],
+  declarations: [LoginComponent],
   imports: [
     CommonModule,
+    RegistrationRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    BookRoutingModule
+
   ]
 })
-export class BookModule { }
+export class RegistrationModule { }

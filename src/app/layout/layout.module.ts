@@ -6,12 +6,12 @@ import { LayoutComponent } from './layout/layout.component';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { FooterComponent } from './footer/footer.component' ; 
+import { FooterComponent } from './footer/footer.component' ;
 
 
 @NgModule({
   declarations: [
-    LayoutComponent,  
+    LayoutComponent,
     NavbarComponent,
     SidebarComponent,
     FooterComponent
@@ -19,10 +19,10 @@ import { FooterComponent } from './footer/footer.component' ;
   imports: [
     CommonModule,
     LayoutRoutingModule
-  ], 
+  ],
   exports: [
     NavbarComponent,
-    SidebarComponent, 
+    SidebarComponent,
     FooterComponent
   ]
 })

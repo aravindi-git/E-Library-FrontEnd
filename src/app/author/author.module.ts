@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SharedModule } from '../shared/shared.module' ; 
+import { SharedModule } from '../shared/shared.module' ;
 
 import { AuthorRoutingModule } from './author-routing.module';
 import { AddAuthorComponent } from './add-author/add-author.component';
@@ -17,9 +17,9 @@ import { ListAuthorComponent } from './list-author/list-author.component';
   ],
   imports: [
     CommonModule,
-    AuthorRoutingModule, 
+    AuthorRoutingModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     SharedModule
   ]
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutePaths } from '../../shared/constants' ; 
+import { RoutePaths } from '../../shared/constants' ;
 
 @Component({
   selector: 'app-add-book',
@@ -10,14 +10,10 @@ export class AddBookComponent implements OnInit {
 
   value = 'Clear me';
 
-  BookListUrl : string =  "/" + RoutePaths.BookList ; 
-  
+  BookListUrl: string =  '/' + RoutePaths.BookList ;
   constructor() { }
 
   ngOnInit(): void {
   }
-
-
- 
 
 }

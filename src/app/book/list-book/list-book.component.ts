@@ -1,12 +1,10 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
-import { RoutePaths } from '../../shared/constants' ; 
-// import { MatPaginatorModule} from '@angular/material/paginator';
-// import {MatSortModule} from '@angular/material/sort';
-// import { MatTableDataSource} from '@angular/material/table';
-
+import { RoutePaths } from '../../shared/constants' ;
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table'; 
+import { MatTableDataSource } from '@angular/material/table';
+// import { BookService } from 'src/app/shared/services/bookService';
+import { BookService } from '../services/book.service' ;
 
 @Component({
   selector: 'app-list-book',
@@ -15,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ListBookComponent implements OnInit {
 
-  newBookUrl : string =  "/" + RoutePaths.NewBook ; 
+  newBookUrl: string =  '/' + RoutePaths.NewBook;
 
   displayedColumns = ['id', 'name', 'progress', 'color'];
   dataSource: MatTableDataSource<UserData>;
@@ -23,7 +21,7 @@ export class ListBookComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private bookService: BookService) {
     // Create 100 users
     const users: UserData[] = [];
     for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
@@ -34,16 +32,26 @@ export class ListBookComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getBookList();
   }
 
-  ngAfterViewInit() {
+  getBookList = async () => {
+    this.bookService.getBookList().subscribe(res => {
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  ngAfterViewInit = () => {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+  applyFilter = (event: Event) => {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 }
@@ -56,7 +64,7 @@ function createNewUser(id: number): UserData {
 
   return {
     id: id.toString(),
-    name: name,
+    name,
     progress: Math.round(Math.random() * 100).toString(),
     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
   };
@@ -76,3 +84,7 @@ export interface UserData {
   progress: string;
   color: string;
 }
+
+export const lol = (name: string): string => {
+  return `the name is ${name}`;
+};

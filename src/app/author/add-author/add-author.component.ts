@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutePaths } from '../../shared/constants' ; 
+import { RoutePaths } from '../../shared/constants' ;
 
 
 
@@ -11,7 +11,7 @@ import { RoutePaths } from '../../shared/constants' ;
 export class AddAuthorComponent implements OnInit {
 
   value = 'Clear me';
-  AuthorListUrl : string =  "/" + RoutePaths.AuthorList; 
+  AuthorListUrl: string =  '/' + RoutePaths.AuthorList;
 
   constructor() { }
 
