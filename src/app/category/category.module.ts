@@ -4,21 +4,19 @@ import { CommonModule } from '@angular/common';
 import { CategoryRoutingModule } from './category-routing.module';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { ListCategoryComponent } from './list-category/list-category.component';
-import { CategoryComponent } from './category/category.component';
 
 
-import { SharedModule } from '../shared/shared.module' ; 
+import { SharedModule } from '../shared/shared.module' ;
 
 
 @NgModule({
   declarations: [
     AddCategoryComponent,
-    ListCategoryComponent,
-    CategoryComponent
+    ListCategoryComponent
     ],
   imports: [
     CommonModule,
-    CategoryRoutingModule , 
+    CategoryRoutingModule ,
     SharedModule
   ]
 })

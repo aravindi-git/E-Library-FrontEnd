@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RoutePaths } from '../shared/constants' ; 
-
-import { CategoryComponent } from './category/category.component' ; 
+import { RoutePaths } from '../shared/constants' ;
+import { ListCategoryComponent } from './list-category/list-category.component';
 
 const routes: Routes = [
-  {path : '' , component: CategoryComponent },
+  {path : '' , component: ListCategoryComponent },
 ];
 
 @NgModule({

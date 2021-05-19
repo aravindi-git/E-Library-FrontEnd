@@ -5,11 +5,9 @@ import { RoutePaths } from '../shared/constants';
 import { DashboardComponent } from '../dashboard/dashboard/dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ListAuthorComponent } from '../author/list-author/list-author.component' ;
-// import { AddAuthorComponent } from '../author/add-author/add-author.component';
-// import { AddUserComponent } from '../user/add-user/add-user.component' ;
 import { ListUserComponent } from '../user/list-user/list-user.component' ;
 import { ListBookComponent } from '../book/list-book/list-book.component' ;
-import { CategoryComponent } from '../category/category/category.component' ;
+import { ListCategoryComponent } from '../category/list-category/list-category.component';
 
 const routes: Routes = [
   { path: '' ,  component : LayoutComponent} ,
@@ -17,12 +15,8 @@ const routes: Routes = [
   { path: RoutePaths.Dashboard, component: DashboardComponent },
   { path: RoutePaths.BookList, component: ListBookComponent },
   { path: RoutePaths.AuthorList, component: ListAuthorComponent  },
-  // { path: RoutePaths.NewAuthor, component:  AddAuthorComponent  },
-  // { path: RoutePaths.EditAuthor, component: AddAuthorComponent  },
   { path: RoutePaths.UserList, component: ListUserComponent  },
-  // { path: RoutePaths.NewUser, component: AddUserComponent  },
-  // { path: RoutePaths.EditUser, component: AddUserComponent  },
-  { path: RoutePaths.Category, component: CategoryComponent  }
+  { path: RoutePaths.Category, component: ListCategoryComponent  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
