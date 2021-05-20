@@ -10,8 +10,10 @@ declare type Book ={
 }
 
 declare type  Category ={
-  id:string;
+  _id:string;
   name:string;
+  indexNumber: string;
+  description: string
 }
 
 declare type  Author ={

@@ -12,18 +12,11 @@ export class  JwtInterceptor implements HttpInterceptor {
 
     const loginUrl = '/auth/signin';
     const token = localStorage.getItem('token');
-    // if (!token){
-    //   return next.handle(request);
-    // }
+
     if (request.url.search(loginUrl) === -1 ) {
-      console.log('not a login function');
       request = request.clone({headers : request.headers.set('authorization' , `bearer ${token}`)});
     }
-    else
-    {
-      console.log('login function');
-      request = request.clone({headers : request.headers.set('Content-Type' , 'application/json')});
-    }
+    request = request.clone({headers : request.headers.set('Content-Type' , 'application/json')});
     return next.handle(request);
 
   }

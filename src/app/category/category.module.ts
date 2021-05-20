@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { CategoryRoutingModule } from './category-routing.module';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { ListCategoryComponent } from './list-category/list-category.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module' ;
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -17,7 +17,10 @@ import { SharedModule } from '../shared/shared.module' ;
   imports: [
     CommonModule,
     CategoryRoutingModule ,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ]
 })
 export class CategoryModule { }
