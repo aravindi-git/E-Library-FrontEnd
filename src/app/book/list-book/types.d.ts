@@ -17,7 +17,7 @@ declare type  Category ={
 }
 
 declare type  Author ={
-  id:string;
+  _id:string;
   name:string;
   books: Book[] ;
 }

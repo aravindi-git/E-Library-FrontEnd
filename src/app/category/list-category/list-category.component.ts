@@ -31,6 +31,11 @@ export class ListCategoryComponent implements OnInit , AfterViewInit {
    this.getCategoryList();
   }
 
+  ngAfterViewInit = () => {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
   getCategoryList = async () => {
     this.categoryService.getCategoryList().subscribe(res => {
       console.log(res);
@@ -42,24 +47,20 @@ export class ListCategoryComponent implements OnInit , AfterViewInit {
       console.log(error);
     });
   }
-    openDialog(): void {
-      const dialogRef = this.dialog.open(AddCategoryComponent, {
-        width: '1400px',
-      });
-      dialogRef.afterClosed().subscribe(() => {this.getCategoryList(); });
-    }
 
-    ngAfterViewInit = () => {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
+  applyFilter = (event: Event) => {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 
-    applyFilter = (event: Event) => {
-      let filterValue = (event.target as HTMLInputElement).value;
-      filterValue = filterValue.trim();
-      filterValue = filterValue.toLowerCase();
-      this.dataSource.filter = filterValue;
-    }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddCategoryComponent, {
+      width: '1400px',
+    });
+    dialogRef.afterClosed().subscribe(() => {this.getCategoryList(); });
+  }
 
 }
 
