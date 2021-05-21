@@ -41,6 +41,13 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
     });
   }
 
+  applyFilter = (event: Event) => {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
 }
 
 

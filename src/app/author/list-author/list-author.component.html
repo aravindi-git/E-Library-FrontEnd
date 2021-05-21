@@ -9,6 +9,13 @@
                         <p class="card-category"> Here is a subtitle for this table</p>
                     </div>
                     <div class="card-body">
+
+                      <div class="example-header">
+                        <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Filter" >
+                        </mat-form-field>
+                      </div>
+
                       <div class="mat-elevation-z8">
                         <table mat-table [dataSource]="dataSource" matSort>
 
