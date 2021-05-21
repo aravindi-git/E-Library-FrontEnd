@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
+import { Component, OnInit , ViewChild , AfterViewInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -16,14 +16,14 @@ export interface DialogData {
 })
 
 
-export class ListCategoryComponent implements OnInit {
+export class ListCategoryComponent implements OnInit , AfterViewInit {
 
   displayedColumns = ['indexNumber', 'name', 'description', 'actions'];
   dataSource: MatTableDataSource<Category>;
   categoryList: Category[] = [];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
   constructor( public dialog: MatDialog , private categoryService: CategoryService){}
 
@@ -36,6 +36,8 @@ export class ListCategoryComponent implements OnInit {
       console.log(res);
       this.categoryList = res;
       this.dataSource = new MatTableDataSource(this.categoryList);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }, error => {
       console.log(error);
     });
@@ -44,10 +46,7 @@ export class ListCategoryComponent implements OnInit {
       const dialogRef = this.dialog.open(AddCategoryComponent, {
         width: '1400px',
       });
-      console.log(dialogRef);
       dialogRef.afterClosed().subscribe(() => {this.getCategoryList(); });
-
-      // this.addClientDialogRef.afterClosed().subscribe(() => { this.getAllClients(); } );
     }
 
     ngAfterViewInit = () => {
@@ -63,5 +62,7 @@ export class ListCategoryComponent implements OnInit {
     }
 
 }
+
+
 
 
