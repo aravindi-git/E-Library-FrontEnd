@@ -10,6 +10,14 @@ type ListResponse = {
   }
 };
 
+type Response = {
+  data: Author
+  status: {
+    isSuccess: boolean;
+    message: string;
+  }
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,4 +35,16 @@ export class AuthorService {
       });
     });
   }
+
+  addAuthor(author: Author): Observable<Author> {
+    return new Observable(obs => {
+      this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/books/authors', author ).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
 }

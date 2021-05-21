@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit , ViewChild} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { AuthorService } from '../services/author.service' ;
+import { AddAuthorComponent } from '../add-author/add-author.component' ;
 
 
 @Component({
@@ -18,7 +20,7 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
   @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
-  constructor(private authorService: AuthorService) {}
+  constructor(public dialog: MatDialog , private authorService: AuthorService) {}
 
   ngOnInit(): void {
      this.getAuthorsList();
@@ -46,6 +48,13 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddAuthorComponent, {
+      width: '1400px',
+    });
+    dialogRef.afterClosed().subscribe(() => {this.getAuthorsList(); });
   }
 
 }

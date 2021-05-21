@@ -2,11 +2,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <button mat-raised-button type="button" class="btn btn-primary pull-right"> Add New Author</button>
+                <button mat-raised-button type="button" class="btn btn-primary pull-right" (click)="openDialog()">
+                  Add New Author
+                </button>
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title ">Authors</h4>
-                        <p class="card-category"> Here is a subtitle for this table</p>
                     </div>
                     <div class="card-body">
 
@@ -41,7 +42,7 @@
                           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
 
-                        <mat-paginator [pageSizeOptions]="[2, 5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        <mat-paginator [pageSizeOptions]="[ 5, 10, 20]" showFirstLastButtons></mat-paginator>
                       </div>
 
                     </div>
