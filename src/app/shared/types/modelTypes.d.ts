@@ -1,4 +1,5 @@
 declare type User  = {
+  _id: string,
   name: string;
   userame: string;
   role: string;

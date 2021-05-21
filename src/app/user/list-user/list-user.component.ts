@@ -1,8 +1,10 @@
-import { Component , Inject} from '@angular/core';
-import { RoutePaths } from '../../shared/constants';
+import { AfterViewInit, Component, OnInit , ViewChild} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AddUserComponent } from '../add-user/add-user.component' ;
-
+import { MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import { AddUserComponent } from '../add-user/add-user.component';
+import { UserService } from '../services/user.service';
 export interface DialogData {
   animal: string;
   name: string;
@@ -13,22 +15,50 @@ export interface DialogData {
   templateUrl: './list-user.component.html',
   styleUrls: ['./list-user.component.scss']
 })
-export class ListUserComponent  {
+export class ListUserComponent implements OnInit, AfterViewInit {
 
-  newUserUrl: string  = '/' + RoutePaths.NewUser;
-constructor( public dialog: MatDialog){}
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AddUserComponent, {
-      // width: '400px',
-    //  data: {requestStatus:  "en" ? status :  "test"}
-    });
-    console.log(dialogRef);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result){
-      }
+  displayedColumns: string[] = ['id', 'name', 'username', 'action'];
+  usersList: User[] = [];
+  dataSource = new MatTableDataSource<User>(this.usersList);
+
+  @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort ,  {static: false}) sort: MatSort;
+
+  constructor(public dialog: MatDialog , private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.getUsersList();
+ }
+
+ ngAfterViewInit(): void {
+   this.dataSource.paginator = this.paginator;
+   this.dataSource.sort = this.sort;
+ }
+
+  getUsersList = async () => {
+    this.userService.getUsersList().subscribe(res => {
+      console.log(res);
+      this.usersList = res;
+      this.dataSource = new MatTableDataSource<User>(this.usersList);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }, error => {
+      console.log(error);
     });
   }
 
+  applyFilter = (event: Event) => {
+    let filterValue = (event.target as HTMLInputElement).value;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddUserComponent, {
+      width: '1400px',
+    });
+    dialogRef.afterClosed().subscribe(() => {this.getUsersList(); });
+  }
 
 }
 

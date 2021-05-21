@@ -1,12 +1,9 @@
 import { Component, OnInit , Inject} from '@angular/core';
 import { RoutePaths } from '../../shared/constants' ;
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
-export interface DialogData {
-
-  requestStatus: any;
-}
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../services/user.service' ;
 
 @Component({
   selector: 'app-add-user',
@@ -15,21 +12,52 @@ export interface DialogData {
 })
 export class AddUserComponent implements OnInit {
 
-  dialogForm: FormGroup;
-  value = 'Clear me';
+  form: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<AddUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private formBuilder: FormBuilder) {
+    private userService: UserService,
+    private toastr: ToastrService) {
 
-      this.dialogForm = this.formBuilder.group({
-      //  pwaCtrl: this.pwaCtrl
-      });
      }
 
   ngOnInit(): void {
+    this.createForm();
   }
+
+  createForm(): void {
+    this.form = new FormGroup({
+      name: new FormControl(''),
+      username: new FormControl(''),
+      role: new FormControl(''),
+      password: new FormControl('')
+    });
+  }
+
+  onSubmit(event: Event): void {
+    event.preventDefault();
+    console.log(this.form.value);
+    if (this.form.valid) {
+      this.userService.addUser(this.form.value).subscribe(res =>
+        {
+          console.log(res);
+          if (res._id){
+            this.toastr.success('User added successfully.');
+          }
+          else{
+            this.toastr.warning('User was not added.');
+          }
+          this.dialogRef.close();
+        }
+        , error => {
+          console.log(error);
+        });
+    }
+    else{
+      console.log('The form is invalid');
+    }
+  }
+
 
   onCancelClick(): void {
     this.dialogRef.close();
