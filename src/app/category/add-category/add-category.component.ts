@@ -15,7 +15,7 @@ export class AddCategoryComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AddCategoryComponent>,
+    private dialogRef: MatDialogRef<AddCategoryComponent>,
     private categoryService: CategoryService,
     private toastr: ToastrService) {
 

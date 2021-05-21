@@ -2,8 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable , from , throwError } from 'rxjs';
 import { ConfigService } from '../../shared/services/serviceHandler/configService';
 
-type Response = {
+type ResponseList = {
   data: Book[];
+  status: {
+    isSuccess: boolean;
+    message: string;
+  }
+};
+
+type Response = {
+  data: Book
   status: {
     isSuccess: boolean;
     message: string;
@@ -19,7 +27,7 @@ export class BookService {
 
   getBookList(): Observable<Book[]> {
     return new Observable(obs => {
-      this.httpConfig.executeGet<Response>('http://localhost:3000/api/v1/books').subscribe(res => {
+      this.httpConfig.executeGet<ResponseList>('http://localhost:3000/api/v1/books').subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -27,4 +35,17 @@ export class BookService {
       });
     });
   }
+
+  saveBook(book: Book): Observable<Book> {
+    return new Observable(obs => {
+      this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/books', book ).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
+
 }

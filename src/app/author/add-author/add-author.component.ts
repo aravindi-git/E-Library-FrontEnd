@@ -15,7 +15,7 @@ export class AddAuthorComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AddAuthorComponent>,
+    private dialogRef: MatDialogRef<AddAuthorComponent>,
     private authorService: AuthorService,
     private toastr: ToastrService) {
 

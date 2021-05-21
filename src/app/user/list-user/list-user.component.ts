@@ -5,10 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { UserService } from '../services/user.service';
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 @Component({
   selector: 'app-list-user',
@@ -17,14 +13,14 @@ export interface DialogData {
 })
 export class ListUserComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'name', 'username', 'action'];
-  usersList: User[] = [];
-  dataSource = new MatTableDataSource<User>(this.usersList);
-
   @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
-  constructor(public dialog: MatDialog , private userService: UserService) {}
+  displayedColumns: string[] = [ 'username', 'name', 'action'];
+  usersList: User[] = [];
+  dataSource = new MatTableDataSource<User>(this.usersList);
+
+  constructor(private dialog: MatDialog , private userService: UserService) {}
 
   ngOnInit(): void {
     this.getUsersList();
@@ -53,9 +49,10 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUserComponent, {
-      width: '1400px',
+      width: '700px',
     });
     dialogRef.afterClosed().subscribe(() => {this.getUsersList(); });
   }

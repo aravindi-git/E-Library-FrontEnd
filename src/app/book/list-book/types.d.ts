@@ -1,7 +1,7 @@
 
 
 declare type Book ={
-  id:string;
+  _id:string;
   name: string;
   indexNumber: string;
   category: string | Category;
@@ -9,14 +9,14 @@ declare type Book ={
   publisher?: string;
 }
 
-declare type  Category ={
+declare type Category ={
   _id:string;
   name:string;
   indexNumber: string;
   description: string
 }
 
-declare type  Author ={
+declare type Author ={
   _id:string;
   name:string;
   books: Book[] ;

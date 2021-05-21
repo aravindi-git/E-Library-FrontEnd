@@ -15,7 +15,7 @@ export class AddUserComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AddUserComponent>,
+    private dialogRef: MatDialogRef<AddUserComponent>,
     private userService: UserService,
     private toastr: ToastrService) {
 

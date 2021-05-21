@@ -25,7 +25,7 @@ export class ListCategoryComponent implements OnInit , AfterViewInit {
   @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
-  constructor( public dialog: MatDialog , private categoryService: CategoryService){}
+  constructor( private dialog: MatDialog , private categoryService: CategoryService){}
 
   ngOnInit(): void {
    this.getCategoryList();
@@ -57,7 +57,7 @@ export class ListCategoryComponent implements OnInit , AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCategoryComponent, {
-      width: '1400px',
+      width: '700px',
     });
     dialogRef.afterClosed().subscribe(() => {this.getCategoryList(); });
   }

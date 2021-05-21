@@ -13,14 +13,14 @@ import { AddAuthorComponent } from '../add-author/add-author.component' ;
   styleUrls: ['./list-author.component.scss']
 })
 export class ListAuthorComponent implements OnInit ,  AfterViewInit{
-  displayedColumns: string[] = ['id', 'name', 'action'];
+  displayedColumns: string[] = ['name', 'action'];
   authorsList: Author[] = [];
   dataSource = new MatTableDataSource<Author>(this.authorsList);
 
   @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
-  constructor(public dialog: MatDialog , private authorService: AuthorService) {}
+  constructor(private dialog: MatDialog , private authorService: AuthorService) {}
 
   ngOnInit(): void {
      this.getAuthorsList();
@@ -52,7 +52,7 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddAuthorComponent, {
-      width: '1400px',
+      width: '700px',
     });
     dialogRef.afterClosed().subscribe(() => {this.getAuthorsList(); });
   }
