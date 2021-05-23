@@ -57,6 +57,19 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
     dialogRef.afterClosed().subscribe(() => {this.getAuthorsList(); });
   }
 
+  editAuthor(row: any): void {
+    let authorObject: Author;
+    this.authorService.getAuthorById(row._id).subscribe(res => {
+      authorObject = res;
+      const dialogRef = this.dialog.open(AddAuthorComponent, {
+        width: '700px',
+        data :  { authorObject }
+      });
+      dialogRef.afterClosed().subscribe(() => {this.getAuthorsList(); });
+    });
+  }
+
+
 }
 
 

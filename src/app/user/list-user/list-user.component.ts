@@ -57,5 +57,17 @@ export class ListUserComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(() => {this.getUsersList(); });
   }
 
+  viewUser(row: any): void {
+      alert('View user');
+  }
+
+  editUser(row: any): void {
+    alert('edit user');
+  }
+
+  deleteUser(row: any): void {
+    alert('delete user');
+  }
+
 }
 

@@ -29,7 +29,15 @@
                           <!-- Weight Column -->
                           <ng-container matColumnDef="action">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Actions </th>
-                            <td mat-cell *matCellDef="let element">  </td>
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button type="button" matTooltip="Edit" (click)="editAuthor(element)"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                              </button>
+                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-warning btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">delete</i>
+                              </button>
+                            </td>
                           </ng-container>
 
                           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

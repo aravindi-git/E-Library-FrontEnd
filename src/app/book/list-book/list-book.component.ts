@@ -18,7 +18,7 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
   booksList: Book[] = [];
-  displayedColumns = ['indexNumber', 'name', 'action'];
+  displayedColumns = ['indexNumber', 'name', 'author', 'category', 'language', 'action'];
   dataSource = new MatTableDataSource<Book>(this.booksList);
 
   constructor(private dialog: MatDialog , private bookService: BookService) {}
@@ -56,6 +56,20 @@ export class ListBookComponent implements OnInit , AfterViewInit{
       width: '700px',
     });
     dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
+  }
+
+  editBook(row: any): void {
+    let bookObject: Book ;
+    this.bookService.getBookById(row._id).subscribe(res => {
+      bookObject = res;
+      const dialogRef = this.dialog.open(AddBookComponent, {
+        width: '700px',
+        data: {
+          bookObject
+        }
+      });
+      dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
+    });
   }
 
 }

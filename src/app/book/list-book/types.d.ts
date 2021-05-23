@@ -7,6 +7,7 @@ declare type Book ={
   category: string | Category;
   author: string | Author;
   publisher?: string;
+  languageName?: string;
 }
 
 declare type Category ={

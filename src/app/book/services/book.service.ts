@@ -36,9 +36,32 @@ export class BookService {
     });
   }
 
+  getBookById(id: string): Observable<Book> {
+    return new Observable(obs => {
+      this.httpConfig.executeGet<Response>(`http://localhost:3000/api/v1/books/?id=${id}`).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
   saveBook(book: Book): Observable<Book> {
     return new Observable(obs => {
       this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/books', book ).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
+
+  updateBook(book: Book): Observable<Book> {
+    return new Observable(obs => {
+      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/books', book ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {

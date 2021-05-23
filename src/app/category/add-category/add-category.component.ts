@@ -13,15 +13,26 @@ import { ToastrService } from 'ngx-toastr';
 export class AddCategoryComponent implements OnInit {
 
   form: FormGroup;
+  isAddMode  = true;
+  selectedId: string;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) private data: {categoryObject: Category},
     private dialogRef: MatDialogRef<AddCategoryComponent>,
     private categoryService: CategoryService,
     private toastr: ToastrService) {
-
      }
 
   ngOnInit(): void {
+    if (this.data != null){
+      if (this.data.categoryObject != null )
+      {
+        this.selectedId = this.data.categoryObject._id;
+      }
+    }
+    if (this.selectedId != null){
+      this.isAddMode = false;
+    }
     this.createForm();
   }
 
@@ -31,6 +42,10 @@ export class AddCategoryComponent implements OnInit {
       name: new FormControl(''),
       description: new FormControl('')
     });
+
+    if (!this.isAddMode) {
+      this.form.patchValue(this.data.categoryObject);
+    }
   }
 
   onCancelClick(): void {
@@ -41,24 +56,49 @@ export class AddCategoryComponent implements OnInit {
     event.preventDefault();
     console.log(this.form.value);
     if (this.form.valid) {
-      this.categoryService.addCategory(this.form.value).subscribe(res =>
-        {
-          console.log(res);
-          if (res._id){
-            this.toastr.success('Category added successfully.');
-          }
-          else{
-            this.toastr.warning('Category was not added.');
-          }
-          this.dialogRef.close();
-        }
-        , error => {
-          console.log(error);
-        });
+      if (this.isAddMode){
+        this.saveCategory(this.form.value);
+      }
+      else{
+        this.updateCategory(this.form.value);
+      }
     }
     else{
       console.log('The form is invalid');
     }
+  }
+
+  saveCategory(category: Category): void {
+    this.categoryService.addCategory(category).subscribe(res =>
+      {
+        if (res._id){
+          this.toastr.success('Category added successfully.');
+        }
+        else{
+          this.toastr.warning('Category was not added.');
+        }
+        this.dialogRef.close();
+      }
+      , error => {
+        console.log(error);
+      });
+  }
+
+  updateCategory(category: Category): void {
+    category._id = this.selectedId;
+    this.categoryService.updateCategory(category).subscribe(res =>
+      {
+        if (res._id){
+          this.toastr.success('Category updated successfully.');
+        }
+        else{
+          this.toastr.warning('Category was not updated.');
+        }
+        this.dialogRef.close();
+      }
+      , error => {
+        console.log(error);
+      });
   }
 
 }

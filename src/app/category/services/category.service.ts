@@ -35,11 +35,32 @@ export class CategoryService {
     });
   }
 
+  getCategoryById(id: string): Observable<Category> {
+    return new Observable(obs => {
+      this.httpConfig.executeGet<Response>(`http://localhost:3000/api/v1/books/categories/?id=${id}`).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
   addCategory(category: Category): Observable<Category> {
     return new Observable(obs => {
       this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/books/categories', category ).subscribe(res => {
         obs.next(res.data);
-       // localStorage.setItem('token', res.data.token);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
+  updateCategory(category: Category): Observable<Category> {
+    return new Observable(obs => {
+      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/books/categories', category ).subscribe(res => {
+        obs.next(res.data);
         obs.complete();
       }, error => {
         obs.error(error);

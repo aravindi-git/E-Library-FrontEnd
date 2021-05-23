@@ -42,7 +42,17 @@
                               <!-- Color Column -->
                               <ng-container matColumnDef="actions">
                                   <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Actions </mat-header-cell>
-                                  <mat-cell *matCellDef="let row"> {{row.color}} </mat-cell>
+                                  <mat-cell *matCellDef="let row">
+                                    <button mat-raised-button type="button" matTooltip="Edit" (click)="editCategory(row)"
+                                        [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button mat-raised-button type="button" matTooltip="Remove" (click)="deleteCategory(row)"
+                                        [matTooltipPosition]="'above'" class="btn btn-warning btn-link btn-sm btn-just-icon">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                  </mat-cell>
                               </ng-container>
 
                               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -32,10 +32,35 @@
                           <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
                       </ng-container>
 
-                      <!-- Color Column -->
+                      <!-- Progress Column -->
+                      <ng-container matColumnDef="author">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Author </mat-header-cell>
+                          <mat-cell *matCellDef="let row"> {{row.author?.name}}</mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="category">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Category </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.category?.name}}</mat-cell>
+                      </ng-container>
+
+
+                      <ng-container matColumnDef="language">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Language </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.languageName}}</mat-cell>
+                      </ng-container>
+
+                      <!-- Action Column -->
                       <ng-container matColumnDef="action">
                           <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Actions </mat-header-cell>
-                          <mat-cell *matCellDef="let row"> {{row.color}} </mat-cell>
+                          <mat-cell *matCellDef="let row">
+                              <button mat-raised-button type="button" matTooltip="Edit" (click)="editBook(row)"
+                              [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">edit</i>
+                              </button>
+                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'" class="btn btn-warning btn-link btn-sm btn-just-icon">
+                                  <i class="material-icons">delete</i>
+                              </button>
+                          </mat-cell>
                       </ng-container>
 
                       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

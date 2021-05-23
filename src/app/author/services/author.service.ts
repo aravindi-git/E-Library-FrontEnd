@@ -36,9 +36,31 @@ export class AuthorService {
     });
   }
 
+  getAuthorById(id: string): Observable<Author> {
+    return new Observable(obs => {
+      this.httpConfig.executeGet<Response>(`http://localhost:3000/api/v1/books/authors/?id=${id}`).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
   addAuthor(author: Author): Observable<Author> {
     return new Observable(obs => {
       this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/books/authors', author ).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
+  updateAuthor(author: Author): Observable<Author> {
+    return new Observable(obs => {
+      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/books/authors', author ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
