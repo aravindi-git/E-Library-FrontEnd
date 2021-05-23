@@ -17,6 +17,7 @@ export class AddBookComponent implements OnInit  {
   selectedId: string;
   categoryList: Category[] = [];
   authorsList: Author[] = [] ;
+  languageList: string[] = ['Sinhala', 'English' , 'Tamil'];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {bookObject: Book},
