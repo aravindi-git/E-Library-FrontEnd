@@ -13,8 +13,11 @@ import { UserService } from '../services/user.service' ;
 export class AddUserComponent implements OnInit {
 
   form: FormGroup;
+  selectedId: string;
+  isAddMode = true;
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: {userObject: User},
     private dialogRef: MatDialogRef<AddUserComponent>,
     private userService: UserService,
     private toastr: ToastrService) {
@@ -22,6 +25,14 @@ export class AddUserComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    if (this.data !=  null ){
+      if (this.data.userObject != null ){
+        this.selectedId = this.data.userObject._id;
+        if (this.selectedId != null ){
+          this.isAddMode = false;
+        }
+      }
+    }
     this.createForm();
   }
 
@@ -32,26 +43,25 @@ export class AddUserComponent implements OnInit {
       role: new FormControl(''),
       password: new FormControl('')
     });
+
+    if (!this.isAddMode)
+    {
+      this.form.patchValue(this.data.userObject);
+    }
   }
 
   onSubmit(event: Event): void {
     event.preventDefault();
     console.log(this.form.value);
     if (this.form.valid) {
-      this.userService.addUser(this.form.value).subscribe(res =>
-        {
-          console.log(res);
-          if (res._id){
-            this.toastr.success('User added successfully.');
-          }
-          else{
-            this.toastr.warning('User was not added.');
-          }
-          this.dialogRef.close();
-        }
-        , error => {
-          console.log(error);
-        });
+      if (this.isAddMode)
+      {
+        this.saveUser(this.form.value);
+      }
+      else
+      {
+        this.updateUser(this.form.value);
+      }
     }
     else{
       console.log('The form is invalid');
@@ -61,6 +71,41 @@ export class AddUserComponent implements OnInit {
 
   onCancelClick(): void {
     this.dialogRef.close();
+  }
+
+  saveUser(user: User): void
+  {
+    this.userService.addUser(user).subscribe(res =>
+      {
+        if (res._id){
+          this.toastr.success('User is added successfully.');
+        }
+        else{
+          this.toastr.warning('User was not added.');
+        }
+        this.dialogRef.close();
+      }
+      , error => {
+        console.log(error);
+      });
+  }
+
+  updateUser(user: User): void
+  {
+    user._id = this.selectedId;
+    this.userService.updateUser(user).subscribe(res =>
+      {
+        if (res._id){
+          this.toastr.success('User is updated successfully.');
+        }
+        else{
+          this.toastr.warning('User was not updated.');
+        }
+        this.dialogRef.close();
+      }
+      , error => {
+        console.log(error);
+      });
   }
 
 }
