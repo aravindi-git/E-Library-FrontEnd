@@ -1,5 +1,5 @@
 import { Input, Component, Output, EventEmitter , OnInit} from '@angular/core';
-import { FormGroup, FormControl , FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl , FormBuilder, Validators } from '@angular/forms';
 import { AuthorizationService } from 'src/app/shared/services/authorizationService';
 import { RouterModule, Routes , Router} from '@angular/router';
 @Component({
@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
 
   createForm(): void {
     this.form = new FormGroup({
-      username: new FormControl(''),
+      username: new FormControl('', [Validators.required]),
       // password: new FormControl(''),
-      role: new FormControl('')
+      role: new FormControl('', [Validators.required])
     });
   }
 

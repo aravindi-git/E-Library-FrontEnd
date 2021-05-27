@@ -53,6 +53,7 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
   openDialog(): void {
     const dialogRef = this.dialog.open(AddAuthorComponent, {
       width: '700px',
+      disableClose: false,
     });
     dialogRef.afterClosed().subscribe(() => {this.getAuthorsList(); });
   }

@@ -15,6 +15,7 @@ export class AddCategoryComponent implements OnInit {
   form: FormGroup;
   isAddMode  = true;
   selectedId: string;
+  submitted = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: {categoryObject: Category},
@@ -38,8 +39,8 @@ export class AddCategoryComponent implements OnInit {
 
   createForm(): void {
     this.form = new FormGroup({
-      indexNumber: new FormControl(''),
-      name: new FormControl(''),
+      indexNumber: new FormControl('' , [Validators.required]),
+      name: new FormControl('', [Validators.required]),
       description: new FormControl('')
     });
 
@@ -54,6 +55,7 @@ export class AddCategoryComponent implements OnInit {
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.submitted = true;
     console.log(this.form.value);
     if (this.form.valid) {
       if (this.isAddMode){

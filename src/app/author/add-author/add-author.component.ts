@@ -15,16 +15,19 @@ export class AddAuthorComponent implements OnInit {
   form: FormGroup;
   selectedId: string;
   isAddMode = true;
+  submitted = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: {authorObject: Author},
     private dialogRef: MatDialogRef<AddAuthorComponent>,
+    private formBuilder: FormBuilder,
     private authorService: AuthorService,
     private toastr: ToastrService) {
 
      }
 
   ngOnInit(): void {
+
     if (this.data != null )
     {
       if (this.data.authorObject != null )
@@ -40,10 +43,13 @@ export class AddAuthorComponent implements OnInit {
   }
 
   createForm(): void {
-    this.form = new FormGroup({
-      name: new FormControl('')
+    this.form =  this.formBuilder.group({
+      name: new FormControl('' , [Validators.required])
     });
-
+    if (this.form.untouched) { console.log('this form is untouched'); }
+    // this.form.markAsUntouched();
+    // this.form.markAsPristine();
+    // this.form.controls['name'].markAsUntouched();
     if (!this.isAddMode)
     {
       this.form.patchValue(this.data.authorObject);
@@ -52,6 +58,7 @@ export class AddAuthorComponent implements OnInit {
 
     onSubmit(event: Event): void {
     event.preventDefault();
+    this.submitted = true;
     if (this.form.valid) {
       if (this.isAddMode){
         this.saveAuthor(this.form.value);
@@ -103,6 +110,4 @@ export class AddAuthorComponent implements OnInit {
         console.log(error);
       });
   }
-
-
 }

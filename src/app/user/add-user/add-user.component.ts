@@ -15,6 +15,8 @@ export class AddUserComponent implements OnInit {
   form: FormGroup;
   selectedId: string;
   isAddMode = true;
+  submitted = false;
+  roleList: string[] = ['Admin', 'Staff'];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {userObject: User},
@@ -38,10 +40,10 @@ export class AddUserComponent implements OnInit {
 
   createForm(): void {
     this.form = new FormGroup({
-      name: new FormControl(''),
-      username: new FormControl(''),
-      role: new FormControl(''),
-      password: new FormControl('')
+      name: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
+      role: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
     });
 
     if (!this.isAddMode)
@@ -53,6 +55,7 @@ export class AddUserComponent implements OnInit {
   onSubmit(event: Event): void {
     event.preventDefault();
     console.log(this.form.value);
+    this.submitted = true;
     if (this.form.valid) {
       if (this.isAddMode)
       {

@@ -15,32 +15,53 @@
                           <div class="row">
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Name" type="text"  formControlName="name">
+                                  <input matInput placeholder="Name" type="text"  formControlName="name" required>
+                                  <span class="text-danger"
+                                    *ngIf="(form.controls.name.touched || submitted) && form.controls.name.errors?.required">
+                                    Name is required
+                                  </span>
                                 </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-12">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="User Name" type="text" formControlName="username">
+                                  <input matInput placeholder="User Name" type="text" formControlName="username" required>
+                                  <span class="text-danger"
+                                    *ngIf="(form.controls.username.touched || submitted) && form.controls.username.errors?.required">
+                                    User Name is required
+                                  </span>
                                 </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Password" type="password" formControlName="password">
+                                <input matInput placeholder="Password" type="password" formControlName="password" required>
+                                <span class="text-danger"
+                                    *ngIf="(form.controls.password.touched || submitted) && form.controls.password.errors?.required">
+                                    Password is required
+                                  </span>
                               </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
                           <div class="col-md-12">
                             <mat-form-field class="example-full-width">
-                              <input matInput placeholder="Role" type="text" formControlName="role">
+                              <mat-label>Role</mat-label>
+                              <mat-select formControlName="role">
+                                <mat-option *ngFor="let item of roleList" [value]="item">
+                                  {{item}}
+                                </mat-option>
+                              </mat-select>
+                              <span class="text-danger"
+                                  *ngIf="(form.controls.role.touched || submitted) && form.controls.role.errors?.required">
+                                  Role is required
+                              </span>
                             </mat-form-field>
                           </div>
                       </div>
-                          <button mat-raised-button type="submit" class="btn btn-primary pull-right">Save</button>
+                          <button mat-raised-button type="submit" class="btn btn-primary pull-right" [disabled]="!form.valid">Save</button>
                           &nbsp; &nbsp; &nbsp;
                           <button mat-raised-button type="button" class="btn btn-info pull-right"  (click)="onCancelClick()">Close</button>
                           <div class="clearfix"></div>

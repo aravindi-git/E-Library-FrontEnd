@@ -18,6 +18,7 @@ export class AddBookComponent implements OnInit  {
   categoryList: Category[] = [];
   authorsList: Author[] = [] ;
   languageList: string[] = ['Sinhala', 'English' , 'Tamil'];
+  submitted = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {bookObject: Book},
@@ -61,8 +62,8 @@ export class AddBookComponent implements OnInit  {
   createForm =  (): void => {
     this.form = new FormGroup({
       id : new FormControl(''),
-      indexNumber : new FormControl(''),
-      name : new FormControl(''),
+      indexNumber : new FormControl('' , [Validators.required]),
+      name : new FormControl('' , [Validators.required]),
       category : new  FormControl(''),
       author : new  FormControl(''),
       languageName : new  FormControl('')
@@ -82,6 +83,7 @@ export class AddBookComponent implements OnInit  {
 
   onSubmit(event: Event): void {
     event.preventDefault();
+    this.submitted = true;
     console.log(this.form.value);
     if (this.form.valid) {
       if (this.isAddMode){
