@@ -16,4 +16,6 @@ export class RoutePaths
     public static UserList  = 'users';
 
     public static Category  = 'categories';
+
+    public static BookIssue = 'bookIssue';
 }

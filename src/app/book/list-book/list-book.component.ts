@@ -6,6 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BookService } from '../services/book.service' ;
 import { AddBookComponent } from '../add-book/add-book.component';
+import { ConfirmDialogService } from '../../shared/confirm-dialog/confirm-dialog.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-list-book',
@@ -21,7 +24,11 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   displayedColumns = ['indexNumber', 'name', 'author', 'category', 'language', 'action'];
   dataSource = new MatTableDataSource<Book>(this.booksList);
 
-  constructor(private dialog: MatDialog , private bookService: BookService) {}
+  constructor(
+    private dialog: MatDialog ,
+    private bookService: BookService ,
+    private dialogService: ConfirmDialogService,
+    private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getBookList();
@@ -71,5 +78,34 @@ export class ListBookComponent implements OnInit , AfterViewInit{
       dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
     });
   }
+
+  removeBook(row: any): void {
+
+    const options = {
+      title: 'Please confirm the deletion !' ,
+      message: 'Are you sure to remove the book  "' + row.name + '" ? ',
+      cancelText: 'No, Cancel',
+      confirmText: 'Yes, Delete.'
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed)
+      {
+        this.bookService.deleteBook(row).subscribe(res => {
+          if (res._id){
+            this.toastr.success('Book is deleted  successfully.');
+            this.getBookList() ;
+          }
+          else{
+            this.toastr.warning('Book  is not deleted.');
+          }
+        });
+      }
+   });
+  }
+
+
 
 }

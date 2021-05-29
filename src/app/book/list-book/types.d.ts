@@ -8,6 +8,7 @@ declare type Book ={
   author: string | Author;
   publisher?: string;
   languageName?: string;
+  isActive: boolean;
 }
 
 declare type Category ={

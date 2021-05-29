@@ -70,5 +70,17 @@ export class BookService {
     });
   }
 
+  deleteBook(book: Book): Observable<Book> {
+    book.isActive = false;
+    return new Observable(obs => {
+      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/books', book ).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
 
 }

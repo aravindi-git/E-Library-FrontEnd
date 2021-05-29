@@ -17,7 +17,8 @@ export const ROUTES: RouteInfo[] = [
   { path: RoutePaths.BookList, title: 'Books',  icon: 'library_books', class: ''  },
   { path: RoutePaths.Category,  title: 'Categories',  icon: 'description', class: '' },
   { path: RoutePaths.AuthorList , title: 'Authors',  icon: 'face', class: ''  },
-  { path: RoutePaths.UserList,  title: 'Users',  icon: 'person', class: '' }
+  { path: RoutePaths.UserList,  title: 'Users',  icon: 'person', class: '' } ,
+  { path: RoutePaths.BookIssue , title : 'Issue a book' , icon: 'library_books', class: '' }
 ];
 
 

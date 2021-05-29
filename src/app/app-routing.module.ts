@@ -20,7 +20,8 @@ const routes: Routes = [
   {path : 'books' , loadChildren: () => import('./book/book.module').then(m => m.BookModule)} ,
   {path : 'users' , loadChildren : () => import('./user/user.module').then(m => m.UserModule)},
   {path : 'categories' , loadChildren : () => import('./category/category.module').then(m => m.CategoryModule)},
-  {path : 'login' , loadChildren : () => import('./registration/registration.module').then(m => m.RegistrationModule)}
+  {path : 'login' , loadChildren : () => import('./registration/registration.module').then(m => m.RegistrationModule)},
+  {path : 'issue' , loadChildren : () => import('./issue-details/issue-details.module').then(m => m.IssueDetailsModule)}
 ];
 
 @NgModule({

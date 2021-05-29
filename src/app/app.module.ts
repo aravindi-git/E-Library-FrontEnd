@@ -14,6 +14,7 @@ import { CategoryModule } from './category/category.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationModule } from './registration/registration.module';
+import { IssueDetailsModule } from './issue-details/issue-details.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { RegistrationModule } from './registration/registration.module';
     CategoryModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RegistrationModule
+    RegistrationModule,
+    IssueDetailsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
