@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { AuthorService } from '../services/author.service' ;
 import { AddAuthorComponent } from '../add-author/add-author.component' ;
+import { ConfirmDialogService } from '../../shared/confirm-dialog/confirm-dialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,7 +22,11 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
   @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
-  constructor(private dialog: MatDialog , private authorService: AuthorService) {}
+  constructor(
+    private dialog: MatDialog ,
+    private authorService: AuthorService,
+    private dialogService: ConfirmDialogService,
+    private toastr: ToastrService) {}
 
   ngOnInit(): void {
      this.getAuthorsList();
@@ -68,6 +74,33 @@ export class ListAuthorComponent implements OnInit ,  AfterViewInit{
       });
       dialogRef.afterClosed().subscribe(() => {this.getAuthorsList(); });
     });
+  }
+
+
+  deleteAuthor(row: any): void {
+    const options = {
+      title: 'Please confirm the deletion !' ,
+      message: 'Are you sure to remove the author  "' + row.name + '" ? ',
+      cancelText: 'No, Cancel',
+      confirmText: 'Yes, Delete.'
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed)
+      {
+        this.authorService.deleteAuthor(row._id).subscribe(res => {
+          if (res.status.isSuccess){
+            this.toastr.success('Author is deleted  successfully.');
+            this.getAuthorsList() ;
+          }
+          else{
+            this.toastr.warning('Author  is not deleted.');
+          }
+        });
+      }
+   });
   }
 
 

@@ -16,7 +16,7 @@ export class AddUserComponent implements OnInit {
   selectedId: string;
   isAddMode = true;
   submitted = false;
-  roleList: string[] = ['Admin', 'Staff'];
+  roleList: any[] = [{text: 'Admin' , value : 'admin'} , {text: 'Staff', value: 'staff'} ];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {userObject: User},

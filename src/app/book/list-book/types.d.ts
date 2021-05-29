@@ -15,11 +15,13 @@ declare type Category ={
   _id:string;
   name:string;
   indexNumber: string;
-  description: string
+  description: string;
+  isActive: boolean;
 }
 
 declare type Author ={
   _id:string;
   name:string;
+  isActive: boolean;
   books: Book[] ;
 }

@@ -5,6 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { UserService } from '../services/user.service';
+import { ConfirmDialogService } from '../../shared/confirm-dialog/confirm-dialog.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-list-user',
@@ -20,7 +23,12 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   usersList: User[] = [];
   dataSource = new MatTableDataSource<User>(this.usersList);
 
-  constructor(private dialog: MatDialog , private userService: UserService) {}
+  constructor(
+    private dialog: MatDialog ,
+    private userService: UserService,
+    private dialogService: ConfirmDialogService,
+    private toastr: ToastrService
+    ) {}
 
   ngOnInit(): void {
     this.getUsersList();
@@ -71,7 +79,29 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   }
 
   deleteUser(row: any): void {
-    alert('delete user');
+    const options = {
+      title: 'Please confirm the deletion !' ,
+      message: 'Are you sure to remove the author  "' + row.name + '" ? ',
+      cancelText: 'No, Cancel',
+      confirmText: 'Yes, Delete.'
+    };
+
+    this.dialogService.open(options);
+
+    this.dialogService.confirmed().subscribe(confirmed => {
+      if (confirmed)
+      {
+        this.userService.deleteUser(row).subscribe(res => {
+          if (res._id){
+            this.toastr.success('User is deleted  successfully.');
+            this.getUsersList() ;
+          }
+          else{
+            this.toastr.warning('User  is not deleted.');
+          }
+        });
+      }
+   });
   }
 
 }

@@ -69,4 +69,10 @@ export class AuthorService {
     });
   }
 
+  deleteAuthor(id: string): Observable<Response> {
+    const API_URL = `http://localhost:3000/api/v1/books/authors/${id}`;
+
+    return this.httpConfig.executeDelete<Response>(API_URL);
+  }
+
 }

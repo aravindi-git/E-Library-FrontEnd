@@ -5,6 +5,7 @@ declare type User  = {
   role: string;
   token: string;
   isExpired: boolean;
+  isActive: boolean;
 }
 
 declare type LoginDetails ={

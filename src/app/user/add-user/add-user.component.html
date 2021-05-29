@@ -50,8 +50,8 @@
                             <mat-form-field class="example-full-width">
                               <mat-label>Role</mat-label>
                               <mat-select formControlName="role">
-                                <mat-option *ngFor="let item of roleList" [value]="item">
-                                  {{item}}
+                                <mat-option *ngFor="let item of roleList" [value]="item.value">
+                                  {{item.text}}
                                 </mat-option>
                               </mat-select>
                               <span class="text-danger"

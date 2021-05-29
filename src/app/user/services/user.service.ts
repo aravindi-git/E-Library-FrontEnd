@@ -68,6 +68,16 @@ export class UserService {
       });
     });
   }
-
+  deleteUser(user: User): Observable<User> {
+    user.isActive = false;
+    return new Observable(obs => {
+      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/users', user ).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
 
 }

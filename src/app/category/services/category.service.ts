@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable , from , throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { ConfigService } from '../../shared/services/serviceHandler/configService';
 
 type ListResponse = {
@@ -68,4 +69,11 @@ export class CategoryService {
     });
   }
 
+  deleteCategory(id: string): Observable<Response> {
+    const API_URL = `http://localhost:3000/api/v1/books/categories/${id}`;
+
+    return this.httpConfig.executeDelete<Response>(API_URL);
+  }
+
 }
+
