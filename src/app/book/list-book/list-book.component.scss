@@ -2,14 +2,18 @@
   margin: 10px 10px 10px 20px;
 }
 
-.book-header{
+.book-header
+{
   margin:10px 30px 0px 30px;
   font-weight: bold;
+
 }
 
-.add-button{
+
+.add-button , .add-button:hover , .add-button:focus {
   margin: 0px 0px 0px 800px;
   font-weight: bolder;
   font-style: normal;
   color: purple;
+  box-shadow: 0px 8px 15px purple;
 }

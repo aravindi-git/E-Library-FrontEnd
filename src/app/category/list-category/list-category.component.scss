@@ -1,3 +1,18 @@
-table {
-  width: 100%;
+.category-header
+{
+  margin:10px 30px 0px 30px;
+  font-weight: bold;
+
+}
+
+.add-button , .add-button:hover , .add-button:focus {
+  margin: 0px 0px 0px 750px;
+  font-weight: bolder;
+  font-style: normal;
+  color: purple;
+  box-shadow: 0px 8px 15px purple;
+}
+
+table{
+  width:100%;
 }

@@ -329,7 +329,7 @@
 
     &[data-background-color="red"]{
         @include sidebar-background-color($brand-danger, $white-color);
-       
+
         .user,
         .logo,
         .nav li.separator{
@@ -375,8 +375,8 @@
     @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
      .main-content{
-        margin-top: 70px;
-        padding: 30px 15px;
+        margin-top: 50px;
+        padding: 10px 15px;
         min-height: calc(100vh - 123px);
     }
 
