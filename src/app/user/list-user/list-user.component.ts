@@ -61,6 +61,7 @@ export class ListUserComponent implements OnInit, AfterViewInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddUserComponent, {
       width: '700px',
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe(() => {this.getUsersList(); });
   }

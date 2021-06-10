@@ -62,6 +62,7 @@ export class ListCategoryComponent implements OnInit, AfterViewInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AddCategoryComponent, {
       width: '700px',
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe(() => { this.getCategoryList(); });
   }

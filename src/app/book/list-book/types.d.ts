@@ -35,3 +35,10 @@ declare type BookSearch = {
   inactive?: boolean;
 
 };
+
+declare type  BookDialogData = {
+  book: Book;
+  authors: Author[];
+  categories: Category[];
+  languages: string[];
+}

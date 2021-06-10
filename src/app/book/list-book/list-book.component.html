@@ -10,7 +10,9 @@
             </div>
             <div class="card-body">
               <div class="example-header search">
-                <app-book-search (filteredBookList)= 'getFilteredBookList($event)'></app-book-search>
+                <app-book-search [categoryList]= 'categoryList' [authorsList]='authorsList' [languageList]='languageList'
+                (filteringOptions)= 'getFilteredBookList($event)'>
+                </app-book-search>
               </div>
               <div class="example-container mat-elevation-z8">
 

@@ -1,10 +1,9 @@
 import { Component, Input, OnInit , Inject} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BookService } from '../services/book.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { CategoryService } from 'src/app/category/services/category.service';
-import { AuthorService } from 'src/app/author/services/author.service';
+
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -17,47 +16,35 @@ export class AddBookComponent implements OnInit  {
   selectedId: string;
   categoryList: Category[] = [];
   authorsList: Author[] = [] ;
-  languageList: string[] = ['Sinhala', 'English' , 'Tamil'];
+  languageList: string[] = [];
   submitted = false;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {bookObject: Book},
+    @Inject(MAT_DIALOG_DATA) public data: BookDialogData,
     private dialogRef: MatDialogRef<AddBookComponent>,
     private bookService: BookService ,
-    private categoryService: CategoryService,
-    private authorService: AuthorService,
     private toastr: ToastrService) {}
 
   ngOnInit(): void {
 
     if (this.data != null){
-      if (this.data.bookObject != null )
+      if (this.data.book != null)
       {
-        this.selectedId = this.data.bookObject._id;
-        console.log(this.data.bookObject);
+        this.selectedId = this.data.book._id;
       }
+      this.categoryList = this.data.categories;
+      this.authorsList = this.data.authors;
+      this.languageList = this.data.languages;
     }
 
     if (this.selectedId != null){
       this.isAddMode = false;
     }
 
-    console.log('isAddMode ' + this.isAddMode);
-    console.log('id ' + this.selectedId);
-    this.getMetaData();
     this.createForm();
   }
 
-  getMetaData = (): void => {
-    this.categoryService.getCategoryList().subscribe(res => {
-      this.categoryList = res;
-    });
 
-    this.authorService.getAuthorsList().subscribe(res => {
-      this.authorsList = res;
-    });
-
-  }
 
   createForm =  (): void => {
     this.form = new FormGroup({
@@ -70,12 +57,12 @@ export class AddBookComponent implements OnInit  {
     });
 
     if (!this.isAddMode) {
-       this.form.patchValue(this.data.bookObject);
+       this.form.patchValue(this.data.book);
 
-       const selectedCategory = this.data.bookObject.category as Category;
+       const selectedCategory = this.data.book.category as Category;
        this.form.get('category')?.setValue(selectedCategory?._id);
 
-       const selectedAuthor = this.data.bookObject.author as Author;
+       const selectedAuthor = this.data.book.author as Author;
        this.form.get('author')?.setValue(selectedAuthor?._id);
 
    }
@@ -120,7 +107,6 @@ export class AddBookComponent implements OnInit  {
   }
 
   updateBook(book: Book): void {
-    console.log('we are in update');
     book._id = this.selectedId;
     this.bookService.updateBook(book).subscribe(res =>
       {
