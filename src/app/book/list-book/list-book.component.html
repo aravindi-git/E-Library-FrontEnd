@@ -1,11 +1,12 @@
 <div class="main-content">
-  <div class="container-fluid">
-    <button mat-raised-button type="button" class="btn btn-primary pull-right"
-    (click)="openDialog()"> Add New Book</button>
     <div class="row col-md-12">
         <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title ">Books</h4>
+              <div class="row">
+                <h3 class="card-title book-header">Books</h3>
+                <button type="button" class="btn btn-info add-button"
+                 (click)="openDialog()"> + New Book</button>
+              </div>
             </div>
             <div class="card-body">
               <div class="example-header search">
@@ -72,7 +73,6 @@
             </div>
         </div>
     </div>
-  </div>
 </div>
 
 
