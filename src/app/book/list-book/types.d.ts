@@ -25,3 +25,13 @@ declare type Author ={
   isActive: boolean;
   books: Book[] ;
 }
+
+
+declare type BookSearch = {
+  key?: string; // book name or book index number
+  author?: string; // book author id
+  category?: string; // book category id
+  language?: string;
+  inactive?: boolean;
+
+};

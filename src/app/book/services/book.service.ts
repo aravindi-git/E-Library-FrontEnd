@@ -82,5 +82,16 @@ export class BookService {
     });
   }
 
+  bookSearch(options: BookSearch): Observable<Book[]> {
+    return new Observable(obs => {
+      this.httpConfig.executePost<ResponseList>('http://localhost:3000/api/v1/books/search', options).subscribe(res => {
+        obs.next(res.data);
+        obs.complete();
+      }, error => {
+        obs.error(error);
+      });
+    });
+  }
+
 
 }

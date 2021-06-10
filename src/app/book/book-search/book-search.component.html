@@ -1,0 +1,60 @@
+
+  <div class="col-md-12">
+    <form [formGroup]="form" (submit)="onSubmit($event)">
+
+      <div class="row">
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Name or Index number" type="text" formControlName="key" >
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let cate of categoryList" [value]="cate._id">
+                  {{cate.name}}
+                </mat-option>
+              </mat-select>
+             </mat-form-field>
+          </div>
+
+          <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Author</mat-label>
+              <mat-select formControlName="author">
+                <mat-option *ngFor="let author of authorsList" [value]="author._id">
+                  {{author.name}}
+                </mat-option>
+              </mat-select>
+             </mat-form-field>
+          </div>
+
+          <div class="row col-md-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>Language</mat-label>
+              <mat-select formControlName="language">
+                <mat-option *ngFor="let item of languageList" [value]="item">
+                  {{item}}
+                </mat-option>
+              </mat-select>
+             </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-4">
+          <mat-checkbox formControlName="inactive" [checked]="viewRemovedBooks" color='primary'> View Removed Books</mat-checkbox>
+        </div>
+        <div class="row col-md-4">
+          <button mat-raised-button type="submit" class="btn btn-sm btn-primary pull-right" >Search</button>
+          &nbsp;&nbsp;
+          <button mat-raised-button type="button" class="btn btn-sm btn-info pull-right" (click)='onClear()' >Clear</button>
+        </div>
+      </div>
+
+  </form>
+</div>
+
+

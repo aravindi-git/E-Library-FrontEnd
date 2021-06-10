@@ -21,6 +21,7 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
 
   booksList: Book[] = [];
+  filteredBooksList: Book[] = [];
   displayedColumns = ['indexNumber', 'name', 'author', 'category', 'language', 'action'];
   dataSource = new MatTableDataSource<Book>(this.booksList);
 
@@ -42,7 +43,8 @@ export class ListBookComponent implements OnInit , AfterViewInit{
     this.bookService.getBookList().subscribe(res => {
       console.log(res);
       this.booksList  = res;
-      this.dataSource = new MatTableDataSource<Book>(this.booksList);
+      this.filteredBooksList = res;
+      this.dataSource = new MatTableDataSource<Book>(this.filteredBooksList);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, error => {
@@ -51,12 +53,7 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   }
 
 
-  applyFilter = (event: Event) => {
-    let filterValue = (event.target as HTMLInputElement).value;
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
-  }
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddBookComponent, {
@@ -104,6 +101,13 @@ export class ListBookComponent implements OnInit , AfterViewInit{
         });
       }
    });
+  }
+
+  getFilteredBookList(filteredBooks: Book[]): void {
+    this.filteredBooksList = filteredBooks;
+    this.dataSource = new MatTableDataSource<Book>(this.filteredBooksList);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
 
