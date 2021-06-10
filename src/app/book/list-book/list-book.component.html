@@ -2,21 +2,18 @@
   <div class="container-fluid">
     <button mat-raised-button type="button" class="btn btn-primary pull-right"
     (click)="openDialog()"> Add New Book</button>
-
-    <div class="example-header">
-      <app-book-search (filteredBookList)= 'getFilteredBookList($event)'></app-book-search>
-    </div>
-
     <div class="row col-md-12">
         <div class="card">
             <div class="card-header card-header-primary">
               <h4 class="card-title ">Books</h4>
             </div>
             <div class="card-body">
+              <div class="example-header search">
+                <app-book-search (filteredBookList)= 'getFilteredBookList($event)'></app-book-search>
+              </div>
               <div class="example-container mat-elevation-z8">
 
                 <mat-table [dataSource]="dataSource" matSort>
-
                 <!-- Name Column -->
                 <ng-container matColumnDef="indexNumber">
                   <mat-header-cell *matHeaderCellDef mat-sort-header  class=" text-primary"> Index Number </mat-header-cell>
@@ -31,18 +28,18 @@
 
                 <!-- Progress Column -->
                 <ng-container matColumnDef="author">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Author </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef class="text-primary"> Author </mat-header-cell>
                     <mat-cell *matCellDef="let row"> {{row.author?.name}}</mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="category">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Category </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef class="text-primary"> Category </mat-header-cell>
                   <mat-cell *matCellDef="let row"> {{row.category?.name}}</mat-cell>
                 </ng-container>
 
 
                 <ng-container matColumnDef="language">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Language </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef class="text-primary"> Language </mat-header-cell>
                   <mat-cell *matCellDef="let row"> {{row.languageName}}</mat-cell>
                 </ng-container>
 
