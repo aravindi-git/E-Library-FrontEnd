@@ -21,13 +21,7 @@ import { JwtModule , JwtModuleOptions} from '@auth0/angular-jwt';
     CommonModule,
     SharedRoutingModule,
     MaterialModule,
-    ToastrModule.forRoot(),
-    // JwtModule.forRoot({
-    //   config: {
-    //     tokenGetter,
-    //     allowedDomains: ['http://localhost:4200/'],
-    //   },
-    // })
+    ToastrModule.forRoot()
   ],
   exports: [
     MaterialModule

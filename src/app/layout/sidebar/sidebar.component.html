@@ -1,15 +1,15 @@
 <div class="logo">
-    <a href="https://www.creative-tim.com" class="simple-text">
+    <a class="simple-text">
         <div class="logo-img">
             <img src="/assets/img/angular2-logo-red.png"/>
         </div>
-        Creative Tim
+        E Library
     </a>
 </div>
 <div class="sidebar-wrapper">
- 
+
     <ul class="nav">
-         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item"> 
+         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>
@@ -17,21 +17,4 @@
         </li>
     </ul>
 
-    <!-- <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item"> 
-
-           <a class="nav-link" [routerLink]="[menuItem.route]" >
-               <i class="material-icons">{{menuItem.iconName}}</i>
-               <p>{{menuItem.displayName}}</p>
-           </a>
-           <span fxflex class="twistie-separator"></span>
-           <span  *ngIf="item.children && item.children.length">
-             <mat-icon class="menu-twistie" [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
-               expand_more
-             </mat-icon>
-           </span>
-       </li>
-   </ul> -->
-
-   
 </div>
