@@ -13,3 +13,8 @@ declare type LoginDetails ={
   role: string;
   password?: string;
 }
+
+declare type UserRole ={
+  text: string;
+  value: string;
+}

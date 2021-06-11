@@ -17,7 +17,7 @@ export class AddUserComponent implements OnInit {
   isAddMode = true;
   submitted = false;
   title = 'Add New User';
-  roleList: any[] = [{text: 'Admin' , value : 'admin'} , {text: 'Staff', value: 'staff'} ];
+  roleList: UserRole[] ; // = [{text: 'Admin' , value : 'admin'} , {text: 'Staff', value: 'staff'} ];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {userObject: User},
@@ -28,6 +28,9 @@ export class AddUserComponent implements OnInit {
      }
 
   ngOnInit(): void {
+
+    this.roleList = this.userService.getUserRolelist();
+
     if (this.data !=  null ){
       if (this.data.userObject != null ){
         this.selectedId = this.data.userObject._id;

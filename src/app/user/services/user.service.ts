@@ -83,4 +83,8 @@ export class UserService {
     });
   }
 
+  getUserRolelist(): UserRole[] {
+    return [{text: 'Admin' , value : 'admin'} , {text: 'Staff', value: 'staff'} ];
+  }
+
 }
