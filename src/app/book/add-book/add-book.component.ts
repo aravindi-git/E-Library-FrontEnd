@@ -18,6 +18,7 @@ export class AddBookComponent implements OnInit  {
   authorsList: Author[] = [] ;
   languageList: string[] = [];
   submitted = false;
+  title = 'Add New Book';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: BookDialogData,
@@ -39,6 +40,7 @@ export class AddBookComponent implements OnInit  {
 
     if (this.selectedId != null){
       this.isAddMode = false;
+      this.title = 'Edit Book';
     }
 
     this.createForm();

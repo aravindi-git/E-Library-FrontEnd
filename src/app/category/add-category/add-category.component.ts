@@ -16,6 +16,7 @@ export class AddCategoryComponent implements OnInit {
   isAddMode  = true;
   selectedId: string;
   submitted = false;
+  title = 'Add New Category';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: {categoryObject: Category},
@@ -33,6 +34,7 @@ export class AddCategoryComponent implements OnInit {
     }
     if (this.selectedId != null){
       this.isAddMode = false;
+      this.title = 'Edit Category';
     }
     this.createForm();
   }

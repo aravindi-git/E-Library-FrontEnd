@@ -16,6 +16,7 @@ export class AddUserComponent implements OnInit {
   selectedId: string;
   isAddMode = true;
   submitted = false;
+  title = 'Add New User';
   roleList: any[] = [{text: 'Admin' , value : 'admin'} , {text: 'Staff', value: 'staff'} ];
 
   constructor(
@@ -32,6 +33,7 @@ export class AddUserComponent implements OnInit {
         this.selectedId = this.data.userObject._id;
         if (this.selectedId != null ){
           this.isAddMode = false;
+          this.title = 'Edit User';
         }
       }
     }

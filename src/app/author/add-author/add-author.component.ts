@@ -16,6 +16,7 @@ export class AddAuthorComponent implements OnInit {
   selectedId: string;
   isAddMode = true;
   submitted = false;
+  title = 'Add New Author';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: {authorObject: Author},
@@ -36,6 +37,7 @@ export class AddAuthorComponent implements OnInit {
         if (this.selectedId != null )
         {
           this.isAddMode = false;
+          this.title = 'Edit Author';
         }
       }
     }
