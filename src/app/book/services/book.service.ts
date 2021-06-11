@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable , from , throwError } from 'rxjs';
 import { ConfigService } from '../../shared/services/serviceHandler/configService';
+import { environment } from '../../../environments/environment';
 
 type ResponseList = {
   data: Book[];
@@ -23,11 +24,13 @@ type Response = {
 })
 export class BookService {
 
+  baseUrl = environment.libraryApi.baseUrl;
+
   constructor(private httpConfig: ConfigService) { }
 
   getBookList(): Observable<Book[]> {
     return new Observable(obs => {
-      this.httpConfig.executeGet<ResponseList>('http://localhost:3000/api/v1/books').subscribe(res => {
+      this.httpConfig.executeGet<ResponseList>(`${this.baseUrl}books`).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -38,7 +41,7 @@ export class BookService {
 
   getBookById(id: string): Observable<Book> {
     return new Observable(obs => {
-      this.httpConfig.executeGet<Response>(`http://localhost:3000/api/v1/books/?id=${id}`).subscribe(res => {
+      this.httpConfig.executeGet<Response>(`${this.baseUrl}books/?id=${id}`).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -49,7 +52,7 @@ export class BookService {
 
   saveBook(book: Book): Observable<Book> {
     return new Observable(obs => {
-      this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/books', book ).subscribe(res => {
+      this.httpConfig.executePost<Response>(`${this.baseUrl}books`, book ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -61,7 +64,7 @@ export class BookService {
 
   updateBook(book: Book): Observable<Book> {
     return new Observable(obs => {
-      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/books', book ).subscribe(res => {
+      this.httpConfig.executePut<Response>(`${this.baseUrl}books`, book ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -73,7 +76,7 @@ export class BookService {
   deleteBook(book: Book): Observable<Book> {
     book.isActive = false;
     return new Observable(obs => {
-      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/books', book ).subscribe(res => {
+      this.httpConfig.executePut<Response>(`${this.baseUrl}books`, book ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -84,7 +87,7 @@ export class BookService {
 
   bookSearch(options: BookSearch): Observable<Book[]> {
     return new Observable(obs => {
-      this.httpConfig.executePost<ResponseList>('http://localhost:3000/api/v1/books/search', options).subscribe(res => {
+      this.httpConfig.executePost<ResponseList>(`${this.baseUrl}books/search`, options).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {

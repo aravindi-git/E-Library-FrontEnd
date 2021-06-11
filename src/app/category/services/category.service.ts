@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable , from , throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ConfigService } from '../../shared/services/serviceHandler/configService';
+import { environment } from '../../../environments/environment';
 
 type ListResponse = {
   data: Category[];
@@ -23,11 +24,13 @@ type Response = {
 })
 export class CategoryService {
 
+  baseUrl = environment.libraryApi.baseUrl;
+
   constructor(private httpConfig: ConfigService) { }
 
   getCategoryList(): Observable<Category[]> {
     return new Observable(obs => {
-      this.httpConfig.executeGet<ListResponse>('http://localhost:3000/api/v1/books/categories').subscribe(res => {
+      this.httpConfig.executeGet<ListResponse>(`${this.baseUrl}books/categories`).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -38,7 +41,7 @@ export class CategoryService {
 
   getCategoryById(id: string): Observable<Category> {
     return new Observable(obs => {
-      this.httpConfig.executeGet<Response>(`http://localhost:3000/api/v1/books/categories/?id=${id}`).subscribe(res => {
+      this.httpConfig.executeGet<Response>(`${this.baseUrl}books/categories/?id=${id}`).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -49,7 +52,7 @@ export class CategoryService {
 
   addCategory(category: Category): Observable<Category> {
     return new Observable(obs => {
-      this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/books/categories', category ).subscribe(res => {
+      this.httpConfig.executePost<Response>(`${this.baseUrl}books/categories`, category ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -60,7 +63,7 @@ export class CategoryService {
 
   updateCategory(category: Category): Observable<Category> {
     return new Observable(obs => {
-      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/books/categories', category ).subscribe(res => {
+      this.httpConfig.executePut<Response>(`${this.baseUrl}books/categories`, category ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -70,7 +73,7 @@ export class CategoryService {
   }
 
   deleteCategory(id: string): Observable<Response> {
-    const API_URL = `http://localhost:3000/api/v1/books/categories/${id}`;
+    const API_URL = `${this.baseUrl}books/categories/${id}`;
 
     return this.httpConfig.executeDelete<Response>(API_URL);
   }

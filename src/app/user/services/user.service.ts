@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable , from , throwError } from 'rxjs';
 import { ConfigService } from '../../shared/services/serviceHandler/configService';
+import { environment } from '../../../environments/environment';
 
 type ListResponse = {
   data: User[];
@@ -23,11 +24,13 @@ type Response = {
 })
 export class UserService {
 
+  baseUrl = environment.libraryApi.baseUrl;
+
   constructor(private httpConfig: ConfigService) { }
 
   getUsersList(): Observable<User[]> {
     return new Observable(obs => {
-      this.httpConfig.executeGet<ListResponse>('http://localhost:3000/api/v1/users').subscribe(res => {
+      this.httpConfig.executeGet<ListResponse>(`${this.baseUrl}users`).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -38,7 +41,7 @@ export class UserService {
 
   getUserById(id: string): Observable<User> {
     return new Observable(obs => {
-      this.httpConfig.executeGet<Response>(`http://localhost:3000/api/v1/users/?id=${id}`).subscribe(res => {
+      this.httpConfig.executeGet<Response>(`${this.baseUrl}users/?id=${id}`).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -49,7 +52,7 @@ export class UserService {
 
   addUser(user: User): Observable<User> {
     return new Observable(obs => {
-      this.httpConfig.executePost<Response>('http://localhost:3000/api/v1/users', user ).subscribe(res => {
+      this.httpConfig.executePost<Response>(`${this.baseUrl}users`, user ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -60,7 +63,7 @@ export class UserService {
 
   updateUser(user: User): Observable<User> {
     return new Observable(obs => {
-      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/users', user ).subscribe(res => {
+      this.httpConfig.executePut<Response>(`${this.baseUrl}users`, user ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
@@ -71,7 +74,7 @@ export class UserService {
   deleteUser(user: User): Observable<User> {
     user.isActive = false;
     return new Observable(obs => {
-      this.httpConfig.executePut<Response>('http://localhost:3000/api/v1/users', user ).subscribe(res => {
+      this.httpConfig.executePut<Response>(`${this.baseUrl}users`, user ).subscribe(res => {
         obs.next(res.data);
         obs.complete();
       }, error => {
