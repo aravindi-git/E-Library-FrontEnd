@@ -1,0 +1,11 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+            <button mat-raised-button type="button" class="btn btn-info pull-right"  (click)="selectView()">{{title}}</button>
+              <app-add-issue *ngIf='!viewList'></app-add-issue>
+              <app-list-issue  *ngIf='viewList'></app-list-issue>
+          </div>
+      </div>
+  </div>
+</div>

@@ -6,10 +6,11 @@ import { AddIssueComponent } from './add-issue/add-issue.component';
 import { ListIssueComponent } from './list-issue/list-issue.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  SharedModule } from '../shared/shared.module';
+import { BookIssueComponent } from './book-issue/book-issue.component';
 
 
 @NgModule({
-  declarations: [AddIssueComponent, ListIssueComponent],
+  declarations: [AddIssueComponent, ListIssueComponent, BookIssueComponent],
   imports: [
     CommonModule,
     IssueDetailsRoutingModule,

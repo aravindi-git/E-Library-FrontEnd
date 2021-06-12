@@ -8,7 +8,8 @@ import { ListAuthorComponent } from '../author/list-author/list-author.component
 import { ListUserComponent } from '../user/list-user/list-user.component' ;
 import { ListBookComponent } from '../book/list-book/list-book.component' ;
 import { ListCategoryComponent } from '../category/list-category/list-category.component';
-import { AddIssueComponent } from '../issue-details/add-issue/add-issue.component' ;
+// import { AddIssueComponent } from '../issue-details/add-issue/add-issue.component' ;
+import { BookIssueComponent } from '../issue-details/book-issue/book-issue.component';
 
 const routes: Routes = [
   { path: '' ,  component : LayoutComponent} ,
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: RoutePaths.AuthorList, component: ListAuthorComponent  },
   { path: RoutePaths.UserList, component: ListUserComponent  },
   { path: RoutePaths.Category, component: ListCategoryComponent  } ,
-  { path: RoutePaths.BookIssue, component: AddIssueComponent  }
+  { path: RoutePaths.BookIssue, component: BookIssueComponent  }
+  // { path: RoutePaths.BookIssue, component: AddIssueComponent  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

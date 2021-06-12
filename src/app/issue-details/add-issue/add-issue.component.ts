@@ -24,8 +24,8 @@ export class AddIssueComponent implements OnInit {
   createForm(): void {
     this.form = new FormGroup({
       indexNumber: new FormControl('' , [Validators.required]),
-      name: new FormControl('', [Validators.required]),
-      description: new FormControl('')
+      studentIndex: new FormControl('', [Validators.required]),
+      dueDate: new FormControl('')
     });
 
   }
@@ -33,7 +33,7 @@ export class AddIssueComponent implements OnInit {
   onSubmit(event: any): void {
   }
 
-  onCancelClick(): void {
+  onCancel(): void {
 
   }
 
