@@ -10,8 +10,6 @@ import { ConfirmDialogService } from '../../shared/confirm-dialog/confirm-dialog
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/category/services/category.service';
 import { AuthorService } from 'src/app/author/services/author.service';
-import { BookSearchComponent } from '../book-search/book-search.component';
-
 @Component({
   selector: 'app-list-book',
   templateUrl: './list-book.component.html',
@@ -21,7 +19,6 @@ export class ListBookComponent implements OnInit , AfterViewInit{
 
   @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
-  @ViewChild(BookSearchComponent) searchComponent: BookSearchComponent;
 
   booksList: Book[] = [];
   filteredBooksList: Book[] = [];
@@ -49,8 +46,6 @@ export class ListBookComponent implements OnInit , AfterViewInit{
     console.log('test after view init');
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.searchObject = this.searchComponent.searchObject;
-    console.log(JSON.stringify(this.searchObject));
   }
   getBookList = async () => {
     this.bookService.getBookList().subscribe(res => {
@@ -74,7 +69,6 @@ export class ListBookComponent implements OnInit , AfterViewInit{
     dialogConfig.data = metaData;
 
     const dialogRef = this.dialog.open(AddBookComponent, dialogConfig);
-    // dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
     dialogRef.afterClosed().subscribe(() => {
       (this.searchObject) ? this.getFilteredBookList(this.searchObject) : this.getBookList();
     });
@@ -87,7 +81,6 @@ export class ListBookComponent implements OnInit , AfterViewInit{
         width: '700px',
         data: metaData
       });
-      // dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
       dialogRef.afterClosed().subscribe(() => {
         (this.searchObject) ? this.getFilteredBookList(this.searchObject) : this.getBookList();
       });

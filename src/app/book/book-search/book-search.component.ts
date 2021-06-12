@@ -11,7 +11,6 @@ export class BookSearchComponent implements OnInit{
   @Input() languageList: string[];
   @Output() filteringOptions: EventEmitter<BookSearch> = new EventEmitter<BookSearch>();
   form: FormGroup;
-  searchObject: BookSearch;
   constructor() { }
 
   ngOnInit(): void {
@@ -31,7 +30,6 @@ export class BookSearchComponent implements OnInit{
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    this.searchObject = this.form.value;
     this.filteringOptions.emit(this.form.value);
   }
 
