@@ -9,6 +9,7 @@ declare type Book ={
   publisher?: string;
   languageName?: string;
   isActive: boolean;
+  updatedAt : Date;
 }
 
 declare type Category ={

@@ -25,7 +25,7 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   filteredBooksList: Book[] = [];
   categoryList: Category[] = [];
   authorsList: Author[] = [] ;
-  displayedColumns = ['indexNumber', 'name', 'author', 'category', 'language', 'action'];
+  displayedColumns = ['indexNumber', 'name', 'author', 'category', 'language', 'lastUpdatedOn', 'action'];
   languageList: string[] = ['Sinhala', 'English' , 'Tamil'];
   dataSource = new MatTableDataSource<Book>(this.booksList);
 

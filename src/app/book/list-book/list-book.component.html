@@ -46,6 +46,12 @@
                   <mat-cell *matCellDef="let row"> {{row.languageName}}</mat-cell>
                 </ng-container>
 
+
+                <ng-container matColumnDef="lastUpdatedOn">
+                  <mat-header-cell *matHeaderCellDef class="text-primary"> Last Updated On </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.updatedAt}}</mat-cell>
+                </ng-container>
+
                 <!-- Action Column -->
                 <ng-container matColumnDef="action">
                     <mat-header-cell *matHeaderCellDef mat-sort-header  class="text-primary"> Actions </mat-header-cell>

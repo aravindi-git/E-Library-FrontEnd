@@ -12,7 +12,6 @@ import { UserService } from '../../user/services/user.service' ;
 export class LoginComponent implements OnInit {
   @Input() error: string | null;
   form: FormGroup ;
-  roleList: UserRole[] ;
 
   constructor(private authorizationService: AuthorizationService ,
               private userService: UserService,
@@ -20,15 +19,14 @@ export class LoginComponent implements OnInit {
               public formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.roleList = this.userService.getUserRolelist();
+
     this.createForm();
   }
 
   createForm(): void {
     this.form = new FormGroup({
       username: new FormControl('', [Validators.required]),
-      password: new FormControl(''),
-      role: new FormControl('', [Validators.required])
+      password: new FormControl('')
     });
   }
 
