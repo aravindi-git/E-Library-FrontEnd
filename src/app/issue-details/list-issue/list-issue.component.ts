@@ -49,15 +49,6 @@ export class ListIssueComponent implements OnInit , AfterViewInit {
       console.log(error);
     });
   }
-
-  applyFilter = (event: Event) => {
-    let filterValue = (event.target as HTMLInputElement).value;
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
-  }
-
-
   editAuthor(row: any): void {
     let authorObject: Author;
     this.authorService.getAuthorById(row._id).subscribe(res => {
