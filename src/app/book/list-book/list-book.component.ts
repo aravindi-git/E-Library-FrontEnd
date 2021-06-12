@@ -10,6 +10,7 @@ import { ConfirmDialogService } from '../../shared/confirm-dialog/confirm-dialog
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/category/services/category.service';
 import { AuthorService } from 'src/app/author/services/author.service';
+import { BookSearchComponent } from '../book-search/book-search.component';
 
 @Component({
   selector: 'app-list-book',
@@ -20,6 +21,7 @@ export class ListBookComponent implements OnInit , AfterViewInit{
 
   @ViewChild(MatPaginator ,  {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort ,  {static: false}) sort: MatSort;
+  @ViewChild(BookSearchComponent) searchComponent: BookSearchComponent;
 
   booksList: Book[] = [];
   filteredBooksList: Book[] = [];
@@ -28,6 +30,7 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   displayedColumns = ['indexNumber', 'name', 'author', 'category', 'language', 'lastUpdatedOn', 'action'];
   languageList: string[] = ['Sinhala', 'English' , 'Tamil'];
   dataSource = new MatTableDataSource<Book>(this.booksList);
+  searchObject: BookSearch;
 
   constructor(
     private dialog: MatDialog ,
@@ -43,12 +46,14 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   }
 
   ngAfterViewInit(): void {
+    console.log('test after view init');
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.searchObject = this.searchComponent.searchObject;
+    console.log(JSON.stringify(this.searchObject));
   }
   getBookList = async () => {
     this.bookService.getBookList().subscribe(res => {
-      console.log(res);
       this.booksList  = res;
       this.filteredBooksList = res;
       this.dataSource = new MatTableDataSource<Book>(this.filteredBooksList);
@@ -69,7 +74,10 @@ export class ListBookComponent implements OnInit , AfterViewInit{
     dialogConfig.data = metaData;
 
     const dialogRef = this.dialog.open(AddBookComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
+    // dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
+    dialogRef.afterClosed().subscribe(() => {
+      (this.searchObject) ? this.getFilteredBookList(this.searchObject) : this.getBookList();
+    });
   }
 
   editBook(row: any): void {
@@ -79,7 +87,10 @@ export class ListBookComponent implements OnInit , AfterViewInit{
         width: '700px',
         data: metaData
       });
-      dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
+      // dialogRef.afterClosed().subscribe(() => {this.getBookList(); });
+      dialogRef.afterClosed().subscribe(() => {
+        (this.searchObject) ? this.getFilteredBookList(this.searchObject) : this.getBookList();
+      });
     });
   }
 
@@ -111,13 +122,15 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   }
 
   getFilteredBookList(filteringOptions: BookSearch): void {
-      this.bookService.bookSearch(filteringOptions).subscribe(res =>
-      {
-        this.filteredBooksList = res;
-        this.dataSource = new MatTableDataSource<Book>(this.filteredBooksList);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
+    console.log('in the filtering function');
+    this.searchObject = filteringOptions;
+    this.bookService.bookSearch(filteringOptions).subscribe(res =>
+    {
+      this.filteredBooksList = res;
+      this.dataSource = new MatTableDataSource<Book>(this.filteredBooksList);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
 
   }
   getMetaData = (): void => {
