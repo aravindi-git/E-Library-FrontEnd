@@ -43,15 +43,30 @@
           </div>
       </div>
 
-      <div class="row col-md-12">
-        <div class="col-md-4">
-            <mat-checkbox formControlName="inactive"  color='primary'>
-              <mat-label class="check-label">View Removed Books</mat-label>
-           </mat-checkbox>
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-label>From Date</mat-label>
+            <input matInput [matDatepicker]="fromDate" formControlName="fromDate" >
+            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+            <mat-datepicker #fromDate></mat-datepicker>
+          </mat-form-field>
         </div>
-        <div class="row col-md-4">
-          <button mat-raised-button type="submit" class="btn btn-sm btn-primary pull-right" >Search</button>
-          &nbsp;&nbsp;
+        <div class="col-md-3">
+          <mat-form-field>
+            <mat-label>To Date</mat-label>
+            <input matInput [matDatepicker]="toDate" formControlName="toDate" >
+            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+            <mat-datepicker #toDate></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3"  style="margin-top:20px;">
+          <mat-checkbox formControlName="inactive"  color='primary'>
+            <mat-label class="check-label">View Removed Books</mat-label>
+         </mat-checkbox>
+      </div>
+        <div class="col-md-3"  style="margin-top:10px;">
+          <button mat-raised-button type="submit" class="btn btn-sm btn-primary pull-right" style="margin-right:10px;" >Search</button>
           <button mat-raised-button type="button" class="btn btn-sm btn-info pull-right" (click)='onClear()' >Clear</button>
         </div>
       </div>

@@ -24,6 +24,8 @@ export class BookSearchComponent implements OnInit{
       category : new  FormControl(''),
       author : new  FormControl(''),
       language: new  FormControl(''),
+      fromDate: new  FormControl(''),
+      toDate: new  FormControl(''),
       inactive: new FormControl(false)
     });
   }
