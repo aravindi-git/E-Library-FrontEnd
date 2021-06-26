@@ -10,6 +10,7 @@ import { ConfirmDialogService } from '../../shared/confirm-dialog/confirm-dialog
 import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/category/services/category.service';
 import { AuthorService } from 'src/app/author/services/author.service';
+import { BookSearchComponent } from '../book-search/book-search.component';
 @Component({
   selector: 'app-list-book',
   templateUrl: './list-book.component.html',
@@ -43,7 +44,6 @@ export class ListBookComponent implements OnInit , AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    console.log('test after view init');
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

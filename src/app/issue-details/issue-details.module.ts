@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { IssueDetailsRoutingModule } from './issue-details-routing.module';
 import { AddIssueComponent } from './add-issue/add-issue.component';
 import { ListIssueComponent } from './list-issue/list-issue.component';

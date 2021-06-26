@@ -40,6 +40,4 @@ export class BookSearchComponent implements OnInit{
     this.filteringOptions.emit(this.form.value);
   }
 
-
-
 }
