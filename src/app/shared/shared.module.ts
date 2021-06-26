@@ -9,6 +9,8 @@ import { ErrorHandlingInterceptor } from './interceptors/error.handling.intercep
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { JwtModule , JwtModuleOptions} from '@auth0/angular-jwt';
+import { SharedComponent } from './shared/shared.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // export function tokenGetter(): any{
 //   return localStorage.getItem('token');
@@ -16,15 +18,20 @@ import { JwtModule , JwtModuleOptions} from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
-  ],
+  SharedComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot()
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    SharedComponent,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [

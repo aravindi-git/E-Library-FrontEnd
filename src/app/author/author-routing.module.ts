@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddAuthorComponent } from './add-author/add-author.component';
-import { ListAuthorComponent } from './list-author/list-author.component'; 
+import { ListAuthorComponent } from './list-author/list-author.component';
 
-import { RoutePaths } from '../shared/constants' ; 
- 
+import { RoutePaths } from '../shared/constants' ;
+
 const routes: Routes = [
   {path: RoutePaths.NewAuthor , component: AddAuthorComponent },
   {path: RoutePaths.EditAuthor , component: AddAuthorComponent },

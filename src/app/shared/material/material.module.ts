@@ -36,7 +36,6 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
-
   ],
 
   imports: [
@@ -110,7 +109,8 @@ import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
     MatTooltipModule,
     MatBadgeModule,
     CdkTableModule
-  ]
+  ] ,
+  providers: []
 
 })
 export class MaterialModule { }

@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module' ;
-import { MaterialModule } from './shared/material/material.module' ;
+// import { MaterialModule } from './shared/material/material.module' ;
 import { LayoutModule } from './layout/layout.module' ;
 import { DashboardModule } from './dashboard/dashboard.module' ;
 import { AuthorModule } from './author/author.module' ;
@@ -23,10 +22,8 @@ import { IssueDetailsModule } from './issue-details/issue-details.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     SharedModule,
-    MaterialModule,
+  //  MaterialModule,
     LayoutModule,
     DashboardModule,
     AuthorModule,
