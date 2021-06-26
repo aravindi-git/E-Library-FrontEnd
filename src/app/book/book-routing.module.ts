@@ -7,9 +7,9 @@ import { AuthGuard } from '../shared/authGuard/auth.guard';
 
 const routes: Routes = [
   {path : '' , redirectTo: RoutePaths.BookList  , pathMatch: 'full'},
-  {path : RoutePaths.NewBook , component: AddBookComponent },
-  {path : RoutePaths.EditBook , component: AddBookComponent },
-  {path : RoutePaths.BookList , component: ListBookComponent }
+  {path : RoutePaths.NewBook , component: AddBookComponent  , canActivate: [AuthGuard]},
+  {path : RoutePaths.EditBook , component: AddBookComponent , canActivate: [AuthGuard]},
+  {path : RoutePaths.BookList , component: ListBookComponent , canActivate: [AuthGuard]}
 ];
 
 @NgModule({
